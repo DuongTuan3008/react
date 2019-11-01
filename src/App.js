@@ -1,26 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import axios from './axios';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomeScreen from './screens/HomeScreen';
+import DetailScreen from './screens/DetailScreen';
+import CategoryScreen from './screens/CategoryScreen';
+
+export default class App extends Component {
+	state = {};
+
+	_onLogin = () => {
+		axios
+			.post('/api/auth', {
+				username: 'admin',
+				password: '123456'
+			})
+			.then((response) =>
+				this.setState({
+					username: response.data.username,
+					id: response.data.id
+				})
+			)
+			.catch((err) => console.log(err));
+	};
+
+	render() {
+		return (
+			<BrowserRouter>
+				<div className="App">
+					<Route exact path="/" render={(props) => {
+						return <HomeScreen {...props} username={this.state.username} onLogin={this._onLogin} />
+					}} />
+					<Route exact path="/api/book/:imageId" render={(props) => {
+						return <DetailScreen {...props} username={this.state.username} onLogin={this._onLogin} />
+					}} />
+					<Route exact path="/category" render={(props) => {
+						return <CategoryScreen {...props} username={this.state.username} onLogin={this._onLogin} />
+					}} />
+				</div>
+			</BrowserRouter>
+		);
+	}
 }
-
-export default App;
