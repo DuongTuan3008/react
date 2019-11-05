@@ -34,7 +34,7 @@ export default class DetailScreen extends Component {
 							{this.state.image ?
 								<Link to={{
 									pathname: '/category',
-									state: { category: this.state.image.category }
+									search: { category: this.state.image.category }
 								}}>
 									<button type="button" className="btn btn-outline-primary" >
 										{this.state.image.category}

@@ -10,7 +10,7 @@ export default class NavBar extends Component {
 		return (
 			<div className="navbar">
 				<div className="container">
-					<SearchField onSearchChanged={this.props.onSearchChanged} />
+					<SearchField category={this.props.category} onSearchChanged={this.props.onSearchChanged} />
 					<Link to={"/"} >
 						<div className="col-6 text-center">
 							<img width="180" height="70" src={logo} alt="logo" />

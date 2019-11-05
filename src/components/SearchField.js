@@ -5,7 +5,7 @@ export default class SearchField extends Component {
 	render() {
 		return (
 			<form className="col-3">
-				<input onChange={this._handleTextChange} className="form-control" type="text" placeholder="Search" />
+				<input onChange={this._handleTextChange} defaultValue={this.props.category} className="form-control" type="text" placeholder="Search" />
 			</form>
 		);
 	}

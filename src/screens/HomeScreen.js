@@ -29,6 +29,7 @@ export default class HomeScreen extends Component {
         const displayedImages = this.state.images.filter(
             img => img.title.includes(this.state.searchString)
                 || img.author.includes(this.state.searchString)
+                || img.category.includes(this.state.searchString)
         )
 
         return (
